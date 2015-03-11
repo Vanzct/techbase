@@ -68,33 +68,48 @@
 		//$(".brand-info").hide();
 
 		function Banner(){
-			var current=0;
+			var current=$("#slideshow .slides li.current").index();
 			var banner_items=$("#slideshow .slides li");
-			var banner_nav_items=$("#slideshow .banner-nav span");
-			$(banner_nav_items).each(function(index,item){
-				//console.log(index);
-				//console.log(item);
-				$(this).click(function(){
-					var lastItem=current;
-					current=index;
-					
-					if($(this).hasClass("current")){
-						console.log("I am current");
-					}else{
-						$(banner_nav_items[lastItem]).removeClass("current");
-						$(banner_nav_items[current]).addClass("current");
-						$(banner_items[lastItem]).removeClass("current").hide();
-						$(banner_items[current ]).addClass("current").show();
-					}
-				});
-				
+			var banner_nav_items = $("#slideshow .banner-nav span").click(function(){
+				var lastItem = current;
+				current = $(this).index();
+				showItem(lastItem);
 			});
+//			var banner_nav_items=$("#slideshow .banner-nav span");
+//			$(banner_nav_items).each(function(index,item){
+//				//console.log(index);
+//				//console.log(item);
+//				$(this).click(function(){
+//					var lastItem=current;
+//					current=index;
+//					
+//					if($(this).hasClass("current")){
+//						console.log("I am current");
+//					}else{
+//						$(banner_nav_items[lastItem]).removeClass("current");
+//						$(banner_nav_items[current]).addClass("current");
+//						$(banner_items[lastItem]).removeClass("current").hide();
+//						$(banner_items[current ]).addClass("current").show();
+//					}
+//				});
+//				
+//			});
 			function showItem(lastItem){
 				$(banner_nav_items[lastItem]).removeClass("current");
 				$(banner_nav_items[current]).addClass("current");
-				$(banner_items[lastItem]).removeClass("current").hide();
-				$(banner_items[current ]).addClass("current").show();
+//				$(banner_items[lastItem]).removeClass("current").hide();
+//				$(banner_items[current ]).addClass("current").show();
+				var _slide = $('#slideshow')
+					,_width = _slide.width();
+
+				_slide.find('.slides').animate({left:-current * _width},function(){
+					$(banner_items[current]).addClass("current");
+					$(banner_items[lastItem]).removeClass("current");
+				});
 			}
+			// 从第一幅banner开始播放
+			showItem($("#slideshow .slides li").length-1);
+			
 			$("#slideshow .prev").click(function(){
 				var itemsSize=banner_items.length;
 				var lastItem=current;
@@ -138,6 +153,7 @@
         },7000);         
     	//});
 	})(jQuery);
+	
 	</script>
   	</body>
 </html>
