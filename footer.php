@@ -1,3 +1,5 @@
+<div id="footer_0" class="container" style="margin-top:20px;">
+</div>
 <div class="row" id="footer">
 	<div class="col-md-1 col-sm-1 row"></div>
 	<div class="col-md-10 col-sm-10">
@@ -28,3 +30,32 @@
 	</div>
 	
 </div>
+<script type="text/javascript">
+	// 页脚自适应沉底，页眉自适应浮动
+	$(function(){
+		$(window).resize(function(){
+			// 页脚
+			var _footer_0 = $('#footer_0')
+				,_footer = $('#footer');
+			
+			_footer.addClass('fixfooter');
+			if(_footer_0.offset().top > _footer.offset().top){
+				_footer.removeClass('fixfooter');
+			}
+			// 幻灯
+			var _slide = $('#slideshow')
+				,_width = _slide.width();
+			_slide.find('.slides').css('width',function(){
+				return $(this).find('li').css('width',_width).length * _width;
+			});
+			$("#slideshow .next").click();
+
+		}).scroll(function(){
+			if($(document).scrollTop() > 50){
+				$('#header').parent().addClass('header_shadow');
+			}else{
+				$('#header').parent().removeClass('header_shadow');
+			}
+		}).resize();
+	});	
+</script>
