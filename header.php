@@ -2,7 +2,7 @@
 class Header{ 
 	public function show($current){ 
 ?>
-<header style="position: fixed;z-index: 1000;top: 0;left: 0;right: 0;">
+<header style="position: fixed;z-index: 10000;top: 0;left: 0;right: 0;">
 	<div class="row" id="header">
 		<div class="title-bar pc-hide">
 			<h3><span class="title">
